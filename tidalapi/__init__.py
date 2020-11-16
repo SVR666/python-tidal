@@ -346,6 +346,11 @@ def _parse_media(json_obj):
     if json_obj['album']:
         album = _parse_album(json_obj['album'], artist, artists)
 
+    tidal_release_date = None
+    release_date = json_obj.get('streamStartDate')
+    if release_date:
+        tidal_release_date = release_date.split("T")[0]
+
     kwargs = {
         'id': json_obj['id'],
         'name': json_obj['title'],
@@ -354,6 +359,9 @@ def _parse_media(json_obj):
         'disc_num': json_obj['volumeNumber'],
         'version': json_obj.get('version'),
         'popularity': json_obj['popularity'],
+        'explicit' : bool(json_obj['explicit']),
+        'tidal_release_date' : tidal_release_date,
+        'audio_quality' : json_obj['audioQuality'],
         'artist': artist,
         'artists': artists,
         'album': album,

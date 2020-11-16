@@ -120,6 +120,7 @@ class Media(Model):
     disc_num = 1
     version = None
     popularity = -1
+    explicit = False
     artist = None
     artists = []
     album = None
